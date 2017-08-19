@@ -1,5 +1,4 @@
-from bottle import route, run, template, request
-from bottle import static_file
+from bottle import route, run, request, static_file
 from datetime import datetime as dt
 
 @route('/', method='GET')
@@ -7,11 +6,14 @@ from datetime import datetime as dt
 def index():
     tstr = '2012-12-29 13:49:37'
     tdatetime = dt.strptime(tstr, '%Y-%m-%d %H:%M:%S')
-    print('{0} {1} -> {2}'.format(tdatetime, request.method, request.url))
-    print('header -> {0}'.format(dict(request.headers)))
-    print('body -> {0}'.format(request.body.read().decode('utf-8')))
+    result1 = '{0} {1} -> {2}'.format(tdatetime, request.method, request.url)
+    result2 = 'header -> {0}'.format(dict(request.headers))
+    result3 = 'body -> {0}'.format(request.body.read().decode('utf-8'))
+    print(result1)
+    print(result2)
+    print(result3)
     print()
-    return template('index')
+    return '{0}<br><br>{1}<br><br>{2}<br>'.format(result1, result2, result3)
 
 @route('/favicon.ico', method='GET')
 def get_favicon():
